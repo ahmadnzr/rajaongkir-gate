@@ -4,14 +4,17 @@ import { AxiosResponse } from 'axios';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
-export class ProvinceService {
+export class CityService {
   private readonly baseURL = 'https://api.rajaongkir.com/starter';
   constructor(private readonly httpService: HttpService) {}
 
-  async findAll(): Promise<any> {
+  async findAll({ provinceId }: { provinceId: string }): Promise<any> {
     try {
+      console.log({
+        key: process.env.API_KEY,
+      });
       const response: AxiosResponse = await firstValueFrom(
-        this.httpService.get(`${this.baseURL}/province`, {
+        this.httpService.get(`${this.baseURL}/city?province=${provinceId}`, {
           headers: {
             key: process.env.API_KEY,
           },
@@ -20,7 +23,7 @@ export class ProvinceService {
       return response.data;
     } catch (err) {
       throw new HttpException(
-        'Failed to fetch provinces from RajaOngkir API',
+        'Failed to fetch cities from RajaOngkir API',
         HttpStatus.BAD_REQUEST,
       );
     }
