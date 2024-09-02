@@ -19,8 +19,6 @@ export class CostService {
       paramsEncoded.append(key, params[key]);
     }
 
-    console.log(paramsEncoded);
-
     try {
       const response: AxiosResponse = await firstValueFrom(
         this.httpService.post(`${this.baseURL}/cost`, paramsEncoded, {
@@ -32,7 +30,6 @@ export class CostService {
       );
       return response.data;
     } catch (err) {
-      console.log('err', err);
       throw new HttpException(
         'Failed to fetch cities from RajaOngkir API',
         HttpStatus.BAD_REQUEST,

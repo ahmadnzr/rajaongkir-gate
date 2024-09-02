@@ -10,9 +10,6 @@ export class CityService {
 
   async findAll({ provinceId }: { provinceId: string }): Promise<any> {
     try {
-      console.log({
-        key: process.env.API_KEY,
-      });
       const response: AxiosResponse = await firstValueFrom(
         this.httpService.get(`${this.baseURL}/city?province=${provinceId}`, {
           headers: {
